@@ -95,26 +95,5 @@ hist(rowSums(Ymat), col = "dodgerblue", xlab = "Responses of Nodes")
 ThetaEstOLS = betaOLS(Ymat, W, Z)  ### estimate for theta
 str(ThetaEstOLS)
 
-###################### Real Data Analysis ##########################################
-
-### transform the csv to R sparse matrix
-
-source("real_data/realDataFunc.R")
-netS = getNetStruc(file = "../data/netStr.csv")
-str(netS)
-Amat = netS$Amat
-W = Amat/rowSums(Amat)  ### obtain W matrix
-
-######################################## NAR Fit from Week 1 to 4 ####################
-
-logYmat = as.matrix(read.csv("../data/logYmat.csv"))
-nodal = read.csv("../data/nodalCovariate.csv")
-nodal$gender = as.numeric(nodal$gender)
-
-train = getRegDf(logYmat, W, nodal)  ### the regression dataset
-reg = lm(Y ~ ., data = train)
-summary(reg) 
-
-
 ```
 
